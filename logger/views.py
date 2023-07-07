@@ -3,9 +3,13 @@
 from django.shortcuts import render
 import logging,requests,random
 from django.http import JsonResponse
+from logging.handlers import TimedRotatingFileHandler
 
 # Create your views here.
 logger = logging.getLogger(__name__)
+path='logs/app.log'
+handler = TimedRotatingFileHandler(path,when="s",interval=10,backupCount=3)
+logger.addHandler(handler)
 
 
 def fetch_api():
