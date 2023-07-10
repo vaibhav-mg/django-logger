@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-bu#-a#+ows_!k(w-wsy6y1%v!f&9!m@k72_a)n39teiey99=84
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '0.0.0.0']
+ALLOWED_HOSTS = ['localhost', '0.0.0.0','65.2.127.64','127.0.0.1']
 
 
 # Application definition
@@ -127,11 +127,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': False,
+    'disable_existing_loggers': False, # What does this mean?
     'handlers': {
         'file': {
             'level': 'DEBUG',
-            'class': 'logging.handlers.WatchedFileHandler',
+            'class': 'logging.handlers.WatchedFileHandler', # What does this mean?
             'filename': 'logs/app.log',
         },
     },
@@ -140,3 +140,30 @@ LOGGING = {
         'level': 'INFO',
     },
 }
+
+
+
+'''
+When disable_existing_loggers is set to False (default),
+it means that the existing loggers in your application will continue to be active and unaffected by 
+the uWSGI logging configuration. This allows your application's loggers to operate independently and 
+write log messages as they normally would.
+
+On the other hand, if disable_existing_loggers is set to True, 
+uWSGI will disable any existing loggers in your application. 
+This means that the loggers you have configured in your code will be disabled and not produce any log messages. 
+Only the loggers configured through uWSGI's logging settings will be active.
+
+
+
+
+logging = library
+handler = module to handle the logging of logs 
+
+The WatchedFileHandler class is similar to the FileHandler class, 
+which writes log messages to a file. 
+However, the key difference is that the WatchedFileHandler has an additional feature: 
+it actively monitors the log file for changes. If the log file is rotated or renamed while the program is running, 
+the WatchedFileHandler automatically switches to writing to the new file without interrupting the logging process. 
+This can be useful in scenarios where log files are rotated periodically to prevent them from growing too large.
+'''

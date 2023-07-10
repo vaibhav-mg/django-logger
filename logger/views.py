@@ -34,3 +34,5 @@ def infinite_data(request):
     i=0
     while i<pow(10,6):
         get_data(request)
+
+
